@@ -5,14 +5,14 @@
 {layout:set name="title"}{title}{/layout:set}
 
 <div class="relative py-16 bg-white overflow-hidden">
-	<div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full" style="background-image: url(blog_image)">
+	<div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full" style="background: url({blog_image}) no-repeat center center fixed;mix-height: 500px;">
 		<div class="relative h-full text-lg max-w-prose mx-auto">
 			<svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewbox="0 0 404 384"><defs><pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternunits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)"></rect></svg>
 			<svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewbox="0 0 404 384"><defs><pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternunits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)"></rect></svg>
 			<svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewbox="0 0 404 384"><defs><pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternunits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)"></rect></svg>
 		</div>
 	</div>
-	<div class="relative px-4 sm:px-6 lg:px-8">
+	<div class="relative px-4 sm:px-6 lg:px-8 bg-white">
 		<div class="text-lg max-w-prose mx-auto mb-6">
 			<h1 class="mt-2 mb-8 text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">{title}</h1>
 			<p class="text-xl text-gray-500 leading-8">
@@ -21,17 +21,61 @@
 		</div>
 		<div class="prose prose-lg text-gray-500 mx-auto">
 			{blog_content}
+			<!-- Upvote downvote section -->
+			{exp:upvotedownvote:votes entry_id="{entry_id}"}
+				<aside id="upvote-downvote" class="mt-10" x-data="{ hasVoted: false, upvotes: {upvotes}, downvotes: {downvotes} }">
+					<div class="flex flex-row justify-around">
+						<div
+							class="w-1/3 cursor-pointer rounded overflow-hidden shadow-lg"
+							@click="if(hasVoted) return false;upvotes = upvotes + 1;upvote(); hasVoted = true;"
+						>
+							<img class="w-full px-10" src="/images/happy-min.svg" />
+							<div class="px-6 py-4">
+								<div class="font-bold text-xl mb-2"><span x-html='upvotes'></span> Votes</div>
+								<p class="text-gray-700 text-base text-xs">
+									click to upvote
+								</p>
+							</div>
+						</div>
+						<div class="w-1/3 cursor-pointer rounded overflow-hidden shadow-lg flex flex-col justify-end">
+							<div class="px-6 py-4">
+								<div class="font-bold text-xl mb-2">
+									<span x-html='getPercentage(upvotes, downvotes)'></span>% Upvoted
+								</div>
+								<div class="font-bold text-md mb-2">
+									(<span x-html='upvotes'></span> / <span x-html='upvotes + downvotes'></span>)
+								</div>
+								<p class="text-gray-700 text-base text-xs" x-show="hasVoted">
+									Thank you for voting!
+								</p>
+							</div>
+						</div>
+						<div
+							class="w-1/3 cursor-pointer rounded overflow-hidden shadow-lg"
+							@click="if(hasVoted) return false;downvotes = downvotes + 1;downvote();hasVoted = true;"
+						>
+							<img class="w-full px-10" src="/images/devil-min.svg" />
+							<div class="px-6 py-4">
+								<div class="font-bold text-xl mb-2"><span x-html='downvotes'></span> Votes</div>
+								<p class="text-gray-700 text-base text-xs">
+									click to downvote
+								</p>
+							</div>
+						</div>
+					</div>
+				</aside>
+			{/exp:upvotedownvote:votes}
 		</div>
-		<!-- Upvote downvote section -->
-		<aside id="upvote-downvote" class="flex flex-row" x-data="{hasVoted: false, upvotes: 0, downvotes: 0}">
-			<div class="w-1/2">
-				Upvotes
-			</div>
-			<div class="w-1/2">
-				Downvotes
-			</div>
-		</aside>
 	</div>
 </div>
+
+<!-- We'll add an entry ID javascript variable here for use in our ajax -->
+{!-- We'll also get the Action URL for upvoting so we know what we're doing --}
+{layout:set name="script_extra"}
+	<script>
+		const entryId = '{entry_id}',
+			actionUrl = '{exp:upvotedownvote:get_action_url}'
+	</script>
+{/layout:set}
 
 {/exp:channel:entries}
