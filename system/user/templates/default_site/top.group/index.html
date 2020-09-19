@@ -1,6 +1,6 @@
 {layout="layouts/main"}
 
-{layout:set name="title"}The Top Amazeco Blog Posts{/layout:set}
+{layout:set name="title"}Entertainment 720 | Where Dreams Come...They Come True{/layout:set}
 
 <div class="relative bg-gray-50 pt-16 pb-20 px-4 sm:px-6 lg:pt-24 lg:pb-28 lg:px-8">
 	<div class="absolute inset-0">
@@ -9,7 +9,7 @@
 	<div class="relative max-w-7xl mx-auto">
 		<div class="text-center">
 			<h2 class="text-3xl leading-9 tracking-tight font-extrabold text-gray-900 sm:text-4xl sm:leading-10">From the blog</h2>
-			<p class="mt-3 max-w-2xl mx-auto text-xl leading-7 text-gray-500 sm:mt-4">Amazeco writes some things. These are the tippy top! Wow!</p>
+			<p class="mt-3 max-w-2xl mx-auto text-xl leading-7 text-gray-500 sm:mt-4">E720 goes around the world twice for our clients!</p>
 		</div>
 		<div class="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
 			{exp:upvotedownvote:top_votes channel="blog" limit="10"}
@@ -23,12 +23,17 @@
 								<h3 class="mt-2 text-xl leading-7 font-semibold text-gray-900">{title}</h3>
 							</a>
 						</div>
+						<div class="my-3">
+							<div class="flex text-sm leading-5 text-gray-500 align-center">
+								<img src="/images/positive-vote.svg" style="max-height:40px" />
+								<p class="text-md pr-10 leading-5 font-medium text-gray-900">&nbsp;{upvotes} votes</p>
+								<img src="/images/negative-vote.svg" style="max-height:40px" />
+								<p class="text-md pr-10 leading-5 font-medium text-gray-900">&nbsp;{downvotes} votes</p>
+							</div>
 						<div class="mt-6 flex items-center">
 							<div class="flex-shrink-0"><a href="#"><img class="h-10 w-10 rounded-full" src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80" alt=""></a></div>
-							<div class="ml-3">
-								<p class="text-sm leading-5 font-medium text-gray-900"><a class="hover:underline" href="#">{author}</a></p>
 								<div class="flex text-sm leading-5 text-gray-500">
-									<time datetime="2020-03-16">{entry_date}</time>
+									<time datetime="2020-03-16">{entry_date format="%Y-%m-%d"}</time>
 									<span class="mx-1">&middot;</span><span>6 min read</span>
 								</div>
 							</div>

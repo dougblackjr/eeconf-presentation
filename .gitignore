@@ -7,19 +7,6 @@ env_local.rb
 node_modules/
 .vscode/
 
-!system/user/addons/index.html
-
-!system/user/addons/download
-!system/user/addons/google_maps
-!system/user/addons/js_tool
-!system/user/addons/testage
-!system/user/addons/debug
-!system/user/addons/safecracker_file
-!system/user/addons/cookie_check
-!system/user/addons/cookie_consent
-!system/user/addons/ellislab_high_ascii_decode
-!system/user/addons/wiki
-
 system/user/cache/*
 !system/user/cache/index.html
 !system/user/cache/.htaccess

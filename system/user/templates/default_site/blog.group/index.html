@@ -2,15 +2,18 @@
 
 {exp:channel:entries channel="blog" url_title="{segment_2}" limit="1"}
 
-{layout:set name="title"}{title}{/layout:set}
+{layout:set name="title"}{title} | Entertainment 720{/layout:set}
 
 <div class="relative py-16 bg-white overflow-hidden">
-	<div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full" style="background: url({blog_image}) no-repeat center center fixed;mix-height: 500px;">
+	<div class="hidden lg:block lg:absolute lg:inset-y-0 lg:h-full lg:w-full">
 		<div class="relative h-full text-lg max-w-prose mx-auto">
 			<svg class="absolute top-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewbox="0 0 404 384"><defs><pattern id="74b3fd99-0a6f-4271-bef2-e80eeafdf357" x="0" y="0" width="20" height="20" patternunits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="384" fill="url(#74b3fd99-0a6f-4271-bef2-e80eeafdf357)"></rect></svg>
 			<svg class="absolute top-1/2 right-full transform -translate-y-1/2 -translate-x-32" width="404" height="384" fill="none" viewbox="0 0 404 384"><defs><pattern id="f210dbf6-a58d-4871-961e-36d5016a0f49" x="0" y="0" width="20" height="20" patternunits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="384" fill="url(#f210dbf6-a58d-4871-961e-36d5016a0f49)"></rect></svg>
 			<svg class="absolute bottom-12 left-full transform translate-x-32" width="404" height="384" fill="none" viewbox="0 0 404 384"><defs><pattern id="d3eb07ae-5182-43e6-857d-35c643af9034" x="0" y="0" width="20" height="20" patternunits="userSpaceOnUse"><rect class="text-gray-200" x="0" y="0" width="4" height="4" fill="currentColor"></rect></pattern></defs><rect width="404" height="384" fill="url(#d3eb07ae-5182-43e6-857d-35c643af9034)"></rect></svg>
 		</div>
+	</div>
+	<div class="flex-shrink-0 h-full">
+		<img class="w-full object-cover" src="{blog_image}" alt="{title}" />
 	</div>
 	<div class="relative px-4 sm:px-6 lg:px-8 bg-white">
 		<div class="text-lg max-w-prose mx-auto mb-6">
@@ -29,7 +32,7 @@
 							class="w-1/3 cursor-pointer rounded overflow-hidden shadow-lg"
 							@click="if(hasVoted) return false;upvotes = upvotes + 1;upvote(); hasVoted = true;"
 						>
-							<img class="w-full px-10" src="/images/happy-min.svg" />
+							<img class="w-full px-10" src="/images/positive-vote.svg" />
 							<div class="px-6 py-4">
 								<div class="font-bold text-xl mb-2"><span x-html='upvotes'></span> Votes</div>
 								<p class="text-gray-700 text-base text-xs">
@@ -45,6 +48,7 @@
 								<div class="font-bold text-md mb-2">
 									(<span x-html='upvotes'></span> / <span x-html='upvotes + downvotes'></span>)
 								</div>
+								<img src="https://media.giphy.com/media/UkhHIZ37IDRGo/giphy.gif" x-show="hasVoted" />
 								<p class="text-gray-700 text-base text-xs" x-show="hasVoted">
 									Thank you for voting!
 								</p>
@@ -54,7 +58,7 @@
 							class="w-1/3 cursor-pointer rounded overflow-hidden shadow-lg"
 							@click="if(hasVoted) return false;downvotes = downvotes + 1;downvote();hasVoted = true;"
 						>
-							<img class="w-full px-10" src="/images/devil-min.svg" />
+							<img class="w-full px-10" src="/images/negative-vote.svg" />
 							<div class="px-6 py-4">
 								<div class="font-bold text-xl mb-2"><span x-html='downvotes'></span> Votes</div>
 								<p class="text-gray-700 text-base text-xs">
